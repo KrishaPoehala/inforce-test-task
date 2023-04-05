@@ -1,0 +1,13 @@
+<div *ngIf="!isEditingMode" class="desc">
+    {{(description$ | async)?.description}}
+</div>
+<hr *ngIf="!isEditingMode">
+    <textarea class="form-control" *ngIf="isEditingMode" (keyup.Enter)="onEditDescription()"
+     [(ngModel)]="value">
+        {{(description$ | async)?.description}}
+    </textarea>
+
+
+<button class="btn btn-primary edit" (click)="onEdit()" 
+    *ngIf="jwt.isLoggedIn() && (isAdmin$ | async)">Edit</button>
+<button class="btn btn-danger cancel" (click)="isEditingMode = false" *ngIf="isEditingMode">Cancel</button>

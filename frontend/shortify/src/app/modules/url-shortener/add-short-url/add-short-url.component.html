@@ -1,0 +1,17 @@
+<div class="modal-body">
+    <form [formGroup]="shortUrlForm" (submit)="onSubmit()">
+        <div class="form-group d-flex flex-column">
+          <label for="urlInput">Enter URL:</label>
+          <input type="url" class="form-control" id="urlInput"
+          style="width: 60%; display: inline-block;" formControlName="shortUrl">
+          <div class="error" *ngFor="let error of errors$ | async">
+            {{error}}
+          </div>
+          <div class="error" *ngIf="shortUrlForm.controls.shortUrl.errors &&
+          shortUrlForm.controls.shortUrl.errors!['invalidUrl']">
+            Invalid url format(should start with https:// or http://)
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary submit" [disabled]="addingNewUrl$ | async">Submit</button>
+    </form>
+</div>

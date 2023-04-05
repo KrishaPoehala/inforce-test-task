@@ -1,0 +1,38 @@
+
+<div class="desc" (click)="onDescription()">See algorithm description...</div>
+
+<div class="container">
+    <div class="urls-header">
+        <h4>
+            Original url
+        </h4>
+        <h4>
+            Shortened url
+        </h4>
+    </div>
+    <div class="urls-records">
+        <div (click)="onShowDetails($event,shortUrl)" class="url-container" *ngFor="let shortUrl of allUrls$ | async;let i = index"
+            [ngClass]="{'even': i % 2 ===0, 'odd':i % 2 === 1}">
+            <p>{{shortUrl.originalUrl}}</p>
+            <div class="rigth-container">
+                <div>
+                    {{shortUrl.shortenedUrl | urlPipe}}
+
+                </div>
+                <div>
+                    <button class="delete-button" *ngIf="jwtService.isLoggedIn() &&
+                     (currentUser$ | async)?.id == shortUrl.createdBy.id " 
+                     (click)="onUrlDelete(shortUrl.id)">
+                        <img id="delete-button" src="https://img.icons8.com/ios/50/null/del-key.png"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="add-url" (click)="onAddUrl()" *ngIf="jwtService.isLoggedIn()">Add url</button>
+        <button class="btn btn-info" *ngIf="!jwtService.isLoggedIn()" (click)="router.navigateByUrl('login')">
+            Login</button>
+    </div>
+</div>
