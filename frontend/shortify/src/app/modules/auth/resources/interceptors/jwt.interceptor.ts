@@ -22,8 +22,5 @@ export class JwtInterceptor implements HttpInterceptor{
         }
         
         return next.handle(request);
-        this.router.navigateByUrl('login');
-        return throwError(() => new Error('Jwt token has expired'));
-
     }
 }

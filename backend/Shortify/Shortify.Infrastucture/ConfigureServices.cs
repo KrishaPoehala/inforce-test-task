@@ -57,6 +57,7 @@ public static class ConfigureServices
         self.AddScoped<IUserRepository, UserRepository>();
         self.AddScoped<IShortUrlsRepository, ShortUrlRepository>();
         self.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+        self.AddScoped<IDescriptionRepository, DescriptionRepository>();
         return self;
     }
 }
