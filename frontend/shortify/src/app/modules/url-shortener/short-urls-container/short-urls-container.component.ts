@@ -12,7 +12,7 @@ import { JwtTokenService } from '../../auth/resources/services/jwt-token.service
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { UserModel } from '../../auth/resources/models/userModel.model';
-import { currentUserSelector } from '../../auth/resources/state/auth.selectors';
+import { currentUserSelector, isAdmin } from '../../auth/resources/state/auth.selectors';
 import { loadCurrentUser } from '../../auth/resources/state/auth.actions';
 import { AlgorithmDescriptionComponent } from '../algorithm-description/algorithm-description.component';
 import { ShortUrlDetailsComponent } from '../short-url-details/short-url-details.component';
@@ -29,12 +29,14 @@ export class ShortUrlsContainerComponent implements OnInit {
   
   allUrls$!:Observable<ShortUrl[]>
   currentUser$!:Observable<UserModel | null>;
+  isAdmin$!:Observable<boolean>;
   ngOnInit(): void {
     this.store.dispatch(loadCurrentUser())
     this.store.dispatch(loadDescription())
     this.store.dispatch(loadUrls());
     this.allUrls$ = this.store.select(allUrlsSelector);
     this.currentUser$ = this.store.select(currentUserSelector);
+    this.isAdmin$ = this.store.select(isAdmin);
   }
 
   onAddUrl(){
@@ -57,4 +59,6 @@ export class ShortUrlsContainerComponent implements OnInit {
     const ref = this.modal.open(ShortUrlDetailsComponent);
     ref.componentInstance.shortUrl = shortUrl;
   }
+
+  
 }

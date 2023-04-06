@@ -2,7 +2,7 @@
     <h5>Created by: </h5>
     <p>{{shortUrl.createdBy.name}}</p>
     <h5>Shortened url: </h5>
-    <p>{{shortUrl.shortenedUrl | urlPipe}}</p>
+    <p> <a [href]="shortUrl.shortenedUrl">{{shortUrl.shortenedUrl | urlPipe}}</a> </p>
     <h5>Original url: </h5> 
     <p>{{shortUrl.originalUrl}} </p>
 </div>

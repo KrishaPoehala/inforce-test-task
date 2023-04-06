@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <button class="delete-button" *ngIf="jwtService.isLoggedIn() &&
-                     (currentUser$ | async)?.id == shortUrl.createdBy.id " 
+                     (((currentUser$ | async)?.id === shortUrl.createdBy.id) || (isAdmin$ | async)) " 
                      (click)="onUrlDelete(shortUrl.id)">
                         <img id="delete-button" src="https://img.icons8.com/ios/50/null/del-key.png"/>
                     </button>
